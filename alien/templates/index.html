@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="static/c.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .btn{
+            width: 60px;
+            height: 35px;
+            font-size: small;
+            float: right; 
+            margin: 0;
+            padding-left: 10pt;
+            padding-top:5pt;
+            z-index: 1;        
+            background: linear-gradient(180deg, #F20505,#000);
+            color: white;
+            text-shadow: 0.1em 0.1em 1.5em #ff0000;
+            border: none;
+            cursor: pointer;
+            opacity: 0.9;
+        }
+        
+        .btn1{
+            margin: 0 19px;
+            padding-left: 4.5pt;
+        }
+        .not{
+            width:100%;
+            height:100px;
+            padding: 10pt;
+            padding-top: 9pt;
+            overflow: initial;
+        }
+    </style>
+    <title>
+        Aliens
+    </title>
+</head>
+
+<body>
+    
+    <div class="banner">
+        <div class="notify">
+        <h1 style='text-align:center;'>
+            <b>ALIENS</b><img src="static/images/ty.gif" alt="aliens">
+        </h1>
+    </div>
+    </div>
+    
+    <div class="main">
+        <div class="signin not">
+            
+            <form action="{{url_for('login')}}">
+                <input type="submit" class="registerbtn btn" value="Login" />                
+            </form>
+            <form action="{{url_for('reg')}}">
+                <input type="submit" class="registerbtn btn btn1" value="Register" />                
+            </form>
+            {% with messages=get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                {% for n,m in messages %}
+                    <p>{{n}} ! {{m}}</p>
+                    {% endfor %}
+                {% endif %}
+                {% endwith %}
+        </div>
+        <div class="signin" style="height:460px;overflow:hidden;">
+            
+        <h3 >Recent Stories</h3>
+        <hr><br>
+        {% for i in range(3) %}
+        <div class="container" style="padding: 10px;font-size:medium">
+            <div class="box1" style="width:100%;background-color:#000;">
+                <div class="content1" style="width: auto;padding:9px">
+                    <h3 style="margin: auto;">{{ posts[i].title }}</h3>
+                    <p style="padding-top: 10px;">{{ posts[i].content }}</p>
+                    <div>
+                        <p style="font-size:8px;padding-top:8px">Posted on {{ posts[i].date_posted}}   <span style="text-align: right;font-size:8px;margin-top:auto">by {{ posts[i].author }}</span>  </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <br>
+            <p>New to Aliens World ? Resgister <a href="{{url_for('reg')}}">here.</a></p>
+
+        </div>
+        <div class="gallery" >
+        
+            <h2 style="margin-bottom: 10px;">
+                ALIENS Gallery
+            </h2>
+            <hr><br>
+            <div class="container">
+                <div class="box">
+                    <div class="imgbox">
+                        <img src="static/images/s.jfif">
+                    </div>
+                    <div class="content">
+                        <h2>alien</h2>
+                        <p>this is an alien</p>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="imgbox">
+                        <img src="static/images/sd.jfif">
+                    </div>
+                    <div class="content">
+                        <h2>alien</h2>
+                        <p>this is an alien</p>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="imgbox">
+                        <img src="static/images/sa.jfif">
+                    </div>
+                    <div class="content">
+                        <h2>alien</h2>
+                        <p>this is an alien</p>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="imgbox">
+                        <img src="static/images/sa.jfif">
+                    </div>
+                    <div class="content">
+                        <h2>alien</h2>
+                        <p>this is an alien</p>
+                    </div>
+                </div>
+            </div>
+    </div>
+    </div>
+    
+    <div class='about'>
+        <h2>
+                ABOUT
+        </h2>
+        <br>
+        <p>This is Aliens world.</p>
+    </div>
+</body>
+</html>

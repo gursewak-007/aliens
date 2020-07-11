@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="static/c.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .btn{
+            width: 60px;
+            height: 35px;
+            font-size: small;
+            float: right; 
+            padding-left: 1pt; 
+            z-index: 1;        
+            background: linear-gradient(180deg, #F20505,#000);
+            color: white;
+            text-shadow: 0.1em 0.1em 1.5em #ff0000;
+            border: none;
+            cursor: pointer;
+            opacity: 0.9;
+        }
+        .not{
+            width:100%;
+            height:100px;
+            padding: 10pt;
+            padding-top:9pt;
+        }
+    </style>
+    <title>
+        Aliens Posts
+    </title>
+</head>
+
+<body>
+    
+    <div class="banner" >
+        
+          
+        <div >
+            
+        <h1 style='text-align:center;'>
+            <b>ALIENS</b><img src="static/images/ty.gif" alt="aliens">
+            
+        </h1>
+    </div>
+    </div>
+    <div class="notiy">
+
+    </div>
+    <div class="main" >
+        <div class="signin not" style="width:100%;">
+            
+            <form action="{{url_for('logout')}}">
+                <input type="submit" class=" btn" value="Logout" />
+                
+            </form>
+            <p>
+                Welcome to Aliens world {{current_user.name}} !
+            </p>
+        </div>
+        <div class="signin" style="float:none">
+            <h2>New Post  </h2>
+            <hr><br>
+            <form method="POST">
+                <b>{{form.title.label()}}</b>
+                    {{form.title()}}
+                    <b>{{form.content.label()}}</b>
+                    {{form.content()}}
+                    <br>
+                    {{form.submit(class='postbtn')}}
+            </form>
+        </div>
+        <div class="alpost">
+            <h2>All Posts</h2>
+            <hr><br>
+
+            {% for post in posts %}
+            <div class="container" style="padding: 10px;">
+                <div class="box1" style="width:100%;background-color:#000;">
+                    <div class="content1" style="width: auto;padding:9px">
+                        <h3 style="margin: auto;">{{ post.title }}</h3>
+                        <p style="padding-top: 10px;">{{ post.content }}</p>
+                        <div>
+                            <p style="font-size:8px;padding-top:8px">Posted on {{ post.date_posted}}   <span style="text-align: right;font-size:8px;margin-top:auto">by {{ post.author }}</span>  </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

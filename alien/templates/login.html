@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="static/c.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        Aliens
+    </title>
+</head>
+
+<body>
+    <div class="banner">
+        <div >
+        <h1 style='text-align:center;'>
+            <b>ALIENS</b><img src="static/images/ty.gif" alt="aliens">
+        </h1>
+    </div>
+    </div>
+    <div class="main" style="align-items: center;">
+        
+            
+        <div class="signin">
+            <div class="notify">
+                {% with messages=get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                {% for n,m in messages %}
+                    <p>{{n}} ! {{m}}</p>
+                    {% endfor %}
+                {% endif %}
+                {% endwith %}
+            </div>
+                <h2 style="margin-bottom: 10px;">Login</h2>
+                <form method="POST">
+                    <hr>
+                    <br>
+                    {{form.hidden_tag()}}
+                    <b>{{form.name.label()}}</b>
+                    {{form.name()}}
+                    
+                    <b>{{form.password.label()}}</b>
+                    {{form.password()}}
+                    <p>{{ form.remember(class="form-check-input") }}
+                    {{ form.remember.label(class="form-check-label") }}</p>
+                    {{form.submit(class='postbtn')}}
+                </form>
+                <p>Already have an account ? Sign in <a href="{{url_for('main')}}">here.</a></p>
+
+            </div>
+    </div>
+</body>
+</html>
