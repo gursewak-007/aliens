@@ -11,7 +11,9 @@ from flask_login import login_user, current_user, logout_user, login_required
 def main():
     if current_user.is_authenticated:
         return redirect(url_for('post'))
-    all=Post.query.all()
+    else:
+        try:all=Post.query.all()
+        except:all=0
     return render_template("index.html" ,posts=all)
 @app.route("/login" , methods=['GET','POST'])
 def login():
@@ -22,20 +24,22 @@ def login():
         if form.validate_on_submit():
             name = form.name.data
             password =form.password.data
-            u=alien.query.filter_by(name=name).first()
-            if u and bcrypt.check_password_hash(u.password,password):
+            try:
+                u=alien.query.filter_by(name=name).first()
+                if u and bcrypt.check_password_hash(u.password,password):
                     login_user(u,remember=form.remember.data)
-                    return redirect(url_for('post'))     
-            else:
-                flash('Login Unsuccessful. Please check name and password', 'danger')
-
+                    return redirect(url_for('post'))
+                else:
+                    raise(PermissionError)
+            except:flash('Login Unsuccessful. Please check name and password', 'danger')
+                 
+            
     return render_template("login.html" ,form=form)
 @app.route("/reg" , methods=['GET','POST'])
 def reg():
     form=regform()
     if request.method == 'POST':
         if form.validate_on_submit():
-            
             name = form.name.data
             hpassword =bcrypt.generate_password_hash(form.password.data).decode('utf-8')
             q=alien(name=name,password=hpassword)
@@ -64,7 +68,8 @@ def post():
         db.session.commit()
         return redirect('/post')
     if request.method=='GET':
-        all=Post.query.all()
+        try:all=Post.query.all()
+        except:all=0
         return render_template('post.html',form=form,posts=all)
 @app.route("/logout")
 def logout():

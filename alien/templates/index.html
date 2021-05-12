@@ -66,23 +66,26 @@
                 {% endif %}
                 {% endwith %}
         </div>
-        <div class="signin" style="height:460px;overflow:hidden;">
+        <div class="signin" style="height:460px;overflow:scroll">
             
         <h3 >Recent Stories</h3>
         <hr><br>
-        {% for i in range(3) %}
-        <div class="container" style="padding: 10px;font-size:medium">
-            <div class="box1" style="width:100%;background-color:#000;">
-                <div class="content1" style="width: auto;padding:9px">
-                    <h3 style="margin: auto;">{{ posts[i].title }}</h3>
-                    <p style="padding-top: 10px;">{{ posts[i].content }}</p>
-                    <div>
-                        <p style="font-size:8px;padding-top:8px">Posted on {{ posts[i].date_posted}}   <span style="text-align: right;font-size:8px;margin-top:auto">by {{ posts[i].author }}</span>  </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {% endfor %}
+            {% if posts==0 %}
+            {% elif posts!=0 %}
+                {% for post in posts %}
+                    <div class="container" style="padding: 10px;font-size:medium;">
+                            <div class="box1" style="width:100%;background-color:#000;">
+                                <div class="content1" style="width: auto;padding:9px">
+                                    <h3 style="margin: auto;">{{ post.title }}</h3>
+                                    <p style="padding-top: 10px;">{{ post.content }}</p>
+                                    <div>
+                                        <p style="font-size:8px;padding-top:8px">Posted on {{ post.date_posted}}   <span style="text-align: right;font-size:8px;margin-top:auto">by {{ post.author }}</span>  </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+            {%endif%}
         <br>
             <p>New to Aliens World ? Resgister <a href="{{url_for('reg')}}">here.</a></p>
 
